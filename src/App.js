@@ -2,16 +2,16 @@ import logo from "./logo.svg";
 import "./App.css";
 import { useState } from "react";
 
-function Header(props) {
+function Header({ title, onChangeMode }) {
   return (
     <header
       onClick={(e) => {
         e.preventDefault();
-        props.onChangeMode();
+        onChangeMode();
       }}
     >
       <h1>
-        <a href="/">{props.title}</a>
+        <a href="/">{title}</a>
       </h1>
     </header>
   );
