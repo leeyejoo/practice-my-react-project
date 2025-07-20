@@ -155,17 +155,40 @@ function App() {
   } else if (mode === "Read") {
     content = <Article title={title} body={body} />;
     contextControl = (
-      <li>
-        <a
-          href={"/update" + id}
-          onClick={(e) => {
-            e.preventDefault();
-            setMode("Update");
-          }}
-        >
-          Update{" "}
-        </a>
-      </li>
+      <>
+        <li>
+          <a
+            href={"/update" + id}
+            onClick={(e) => {
+              e.preventDefault();
+              setMode("Update");
+            }}
+          >
+            Update{" "}
+          </a>
+        </li>
+        <li>
+          <input
+            type="button"
+            value="Delete"
+            onClick={() => {
+              const newTopics = [];
+              // 삭제하려는 topic을 제외한 것만 새로 push 해줌
+              // => 해당 topic은 삭제 됨 (제외)
+              for (let i = 0; i < topics.length; i++) {
+                if (topics[i].id !== id) {
+                  newTopics.push(topics[i]);
+                }
+              }
+
+              // state에 세팅
+              setTopics(newTopics);
+              setMode("Welcome");
+              setId(null);
+            }}
+          />
+        </li>
+      </>
     );
   } else if (mode === "Create") {
     content = (
